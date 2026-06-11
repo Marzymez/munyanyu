@@ -3,23 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💜 Для тебя</title>
+<title>💜 Invitation</title>
 
 <style>
 body{
 margin:0;
 overflow:hidden;
-background:
-linear-gradient(rgba(0,0,0,0.80), rgba(0,0,0,0.92)),
-url("tae.jpg") center center / cover no-repeat fixed;
 font-family: Georgia, serif;
-color:#ffffff;
+background:
+url("tae.jpg") center center / cover no-repeat fixed;
+color:white;
 }
 
-.screen{
-height:100vh;
-width:100%;
+/* dark overlay */
+body::before{
+content:"";
 position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.75);
+z-index:0;
+}
+
+/* screens */
+.screen{
+position:absolute;
+z-index:2;
+width:100%;
+height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -30,43 +43,47 @@ padding:20px;
 
 .hidden{display:none;}
 
+/* CARD STYLE (IMPORTANT) */
+.card{
+background:rgba(0,0,0,0.4);
+backdrop-filter: blur(8px);
+padding:25px 30px;
+border-radius:18px;
+max-width:700px;
+box-shadow:0 0 25px rgba(168,85,247,0.3);
+}
+
+/* TEXT */
 h1{
 color:#ffffff;
-text-shadow:
-0 0 5px #a855f7,
-0 0 15px #a855f7,
-0 0 30px #7c3aed;
-font-size:46px;
+text-shadow:0 0 10px #a855f7, 0 0 25px #7c3aed;
+font-size:42px;
 }
 
 p{
-max-width:700px;
 font-size:20px;
 line-height:1.7;
 color:#f3e8ff;
-text-shadow:
-0 0 6px #a855f7,
-0 0 12px rgba(168,85,247,0.8);
+text-shadow:0 0 8px rgba(168,85,247,0.6);
 }
 
+/* BUTTONS */
 button, a.button{
-background:#7c3aed;
-color:white;
-border:none;
+margin-top:20px;
 padding:14px 30px;
+border:none;
 border-radius:30px;
 cursor:pointer;
-box-shadow:
-0 0 10px #7c3aed,
-0 0 25px #a855f7;
+background:#7c3aed;
+color:white;
+font-size:16px;
+text-decoration:none;
+box-shadow:0 0 15px #7c3aed, 0 0 30px #a855f7;
 transition:0.3s;
 }
 
 button:hover, a.button:hover{
 transform:scale(1.05);
-box-shadow:
-0 0 15px #a855f7,
-0 0 40px #a855f7;
 }
 
 /* hearts */
@@ -81,17 +98,6 @@ animation:fall linear forwards;
 0%{transform:translateY(-10vh);opacity:1;}
 100%{transform:translateY(110vh);opacity:0;}
 }
-
-/* fade */
-.fade{
-animation:fadeIn 1.5s ease forwards;
-opacity:0;
-}
-
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(10px);}
-to{opacity:1;transform:translateY(0);}
-}
 </style>
 </head>
 
@@ -103,26 +109,30 @@ to{opacity:1;transform:translateY(0);}
 
 <!-- SCREEN 1 -->
 <div class="screen" id="s1">
-<h1 class="fade">💜</h1>
-<p class="fade">с днём рождения, Муняню 🤍</p>
+<div class="card">
+<h1>💜</h1>
+<p>с днём рождения, Муняню 🤍</p>
 <button onclick="next1()">дальше</button>
+</div>
 </div>
 
 <!-- SCREEN 2 -->
 <div class="screen hidden" id="s2">
-<p class="fade">
+<div class="card">
+<p>
 пусть у тебя всё складывается так, как ты хочешь, и жизнь радует каждый день.<br><br>
 люблю и очень ценю тебя!
 </p>
 <button onclick="next2()">ещё</button>
 </div>
+</div>
 
 <!-- SCREEN 3 -->
 <div class="screen hidden" id="s3">
-
+<div class="card">
 <h1>🎫</h1>
 
-<p class="fade">твоя чупапи 🫶🏻🤍</p>
+<p>твоя чупапи 🫶🏻🤍</p>
 
 <h1>Концерт Валерия Меладзе</h1>
 
@@ -131,7 +141,7 @@ to{opacity:1;transform:translateY(0);}
 <a class="button" href="ticket.pdf" target="_blank">
 Открыть билет (PDF)
 </a>
-
+</div>
 </div>
 
 <script>
