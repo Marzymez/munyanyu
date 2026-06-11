@@ -3,44 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💜 Invitation</title>
+<title>💜 Для тебя</title>
 
 <style>
 body{
 margin:0;
 overflow:hidden;
 background:
-linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.9)),
 url("tae.jpg") center center / cover no-repeat fixed;
 font-family: Georgia, serif;
-color:#c9a0ff;
+color:#e9d5ff;
 }
 
 .screen{
 height:100vh;
+width:100%;
+position:absolute;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
 padding:20px;
-position:absolute;
-width:100%;
 }
 
 .hidden{display:none;}
 
 h1{
-color:#d7b3ff;
-text-shadow:0 0 20px #a855f7;
-font-size:40px;
+color:#d8b4fe;
+text-shadow:0 0 25px #a855f7;
+font-size:42px;
 }
 
 p{
-max-width:650px;
+max-width:700px;
 font-size:18px;
 line-height:1.7;
-color:#e9d5ff;
+text-shadow:0 2px 10px rgba(0,0,0,0.8);
 }
 
 button{
@@ -49,10 +49,20 @@ padding:14px 30px;
 border:none;
 border-radius:30px;
 cursor:pointer;
-font-size:16px;
 background:#a855f7;
 color:white;
-box-shadow:0 0 15px #a855f7;
+box-shadow:0 0 20px #a855f7;
+}
+
+a.button{
+display:inline-block;
+margin-top:20px;
+padding:14px 30px;
+border-radius:30px;
+background:#7c3aed;
+color:white;
+text-decoration:none;
+box-shadow:0 0 20px #7c3aed;
 }
 
 /* hearts */
@@ -68,21 +78,15 @@ animation:fall linear forwards;
 100%{transform:translateY(110vh);opacity:0;}
 }
 
-/* glow */
-.glow{
-text-shadow:0 0 25px #a855f7;
+/* fade */
+.fade{
+animation:fadeIn 1.5s ease forwards;
+opacity:0;
 }
 
-/* pdf button */
-a.button{
-display:inline-block;
-margin-top:20px;
-padding:14px 25px;
-background:#7c3aed;
-color:white;
-border-radius:30px;
-text-decoration:none;
-box-shadow:0 0 20px #7c3aed;
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;transform:translateY(0);}
 }
 </style>
 </head>
@@ -93,38 +97,41 @@ box-shadow:0 0 20px #7c3aed;
 <source src="music.mp3" type="audio/mpeg">
 </audio>
 
+<!-- SCREEN 1 -->
 <div class="screen" id="s1">
-<h1 class="glow">💜</h1>
-<p>
-Иногда один человек превращает обычные дни в музыку.
-</p>
-<button onclick="next1()">Продолжить</button>
+<h1 class="fade">💜</h1>
+<p class="fade">с днём рождения, Муняню 🤍</p>
+<button onclick="next1()">дальше</button>
 </div>
 
+<!-- SCREEN 2 -->
 <div class="screen hidden" id="s2">
-<p>
-Я не буду долго говорить.
-<br><br>
-Я просто хочу, чтобы ты увидела это.
+<p class="fade">
+пусть у тебя всё складывается так, как ты хочешь, и жизнь радует каждый день.<br><br>
+люблю и очень ценю тебя!
 </p>
-<button onclick="next2()">Дальше</button>
+<button onclick="next2()">ещё</button>
 </div>
 
+<!-- SCREEN 3 -->
 <div class="screen hidden" id="s3">
-<h1 class="glow">🎫</h1>
 
-<p>У нас есть один вечер.</p>
+<h1>🎫</h1>
+
+<p class="fade">твоя чупапи 🫶🏻🤍</p>
 
 <h1>Концерт Валерия Меладзе</h1>
 
-<p>И я хочу провести его с тобой 💜</p>
+<p>Этот вечер уже ждёт тебя 💜</p>
 
 <a class="button" href="ticket.pdf" target="_blank">
 Открыть билет (PDF)
 </a>
+
 </div>
 
 <script>
+
 function next1(){
 document.getElementById("s1").classList.add("hidden");
 document.getElementById("s2").classList.remove("hidden");
@@ -136,6 +143,7 @@ document.getElementById("s2").classList.add("hidden");
 document.getElementById("s3").classList.remove("hidden");
 }
 
+/* music */
 function startMusic(){
 const m=document.getElementById("music");
 m.volume=0.5;
@@ -152,6 +160,7 @@ h.style.animationDuration=(3+Math.random()*3)+"s";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),6000);
 },250);
+
 </script>
 
 </body>
