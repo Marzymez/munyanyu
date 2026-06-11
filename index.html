@@ -3,23 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Для тебя ❤️</title>
+<title>💜 Invitation</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
 body{
 margin:0;
 overflow:hidden;
-background: url("tae.jpg") center/cover no-repeat;
-color:white;
-font-family:Georgia, serif;
+background:
+linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)),
+url("tae.jpg") center/cover no-repeat;
+font-family: Georgia, serif;
+color:#c9a0ff;
 }
-
 
 .screen{
 height:100vh;
@@ -28,132 +23,135 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding:30px;
+padding:20px;
+position:absolute;
+width:100%;
 }
 
-.hidden{
-display:none;
-}
+.hidden{display:none;}
 
 h1{
-font-size:3rem;
-margin-bottom:20px;
+color:#d7b3ff;
+text-shadow:0 0 20px #a855f7;
+font-size:40px;
 }
 
 p{
-font-size:1.3rem;
-line-height:1.8;
-max-width:700px;
+max-width:650px;
+font-size:18px;
+line-height:1.7;
+color:#e9d5ff;
 }
 
 button{
-margin-top:35px;
-padding:15px 35px;
-font-size:18px;
+margin-top:20px;
+padding:14px 30px;
 border:none;
-border-radius:50px;
+border-radius:30px;
 cursor:pointer;
-background:white;
+font-size:16px;
+background:#a855f7;
+color:white;
+box-shadow:0 0 15px #a855f7;
 }
 
-.ticket{
-max-width:400px;
-width:90%;
-margin-top:25px;
-border-radius:15px;
-box-shadow:0 0 30px rgba(255,255,255,.2);
+/* hearts */
+.heart{
+position:absolute;
+color:#d946ef;
+font-size:18px;
+animation:fall linear forwards;
 }
 
-.fade{
-animation:fade 1.5s ease;
+@keyframes fall{
+0%{transform:translateY(-10vh);opacity:1;}
+100%{transform:translateY(110vh);opacity:0;}
 }
 
-@keyframes fade{
-from{
-opacity:0;
-transform:translateY(20px);
+/* glow */
+.glow{
+text-shadow:0 0 25px #a855f7;
 }
-to{
-opacity:1;
-transform:translateY(0);
-}
+
+/* pdf button */
+a.button{
+display:inline-block;
+margin-top:20px;
+padding:14px 25px;
+background:#7c3aed;
+color:white;
+border-radius:30px;
+text-decoration:none;
+box-shadow:0 0 20px #7c3aed;
 }
 </style>
 </head>
 
 <body>
 
-<div class="screen fade" id="page1">
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
 
-<h1>✨</h1>
-
+<div class="screen" id="s1">
+<h1 class="glow">💜</h1>
 <p>
-"Я не могу без тебя..."
+Иногда один человек превращает обычные дни в музыку.
 </p>
-
-<br>
-
-<p>
-Иногда одна песня может напомнить о человеке.
-Иногда один вечер может стать воспоминанием на годы.
-</p>
-
-<button onclick="next1()">
-Продолжить
-</button>
-
+<button onclick="next1()">Продолжить</button>
 </div>
 
-<div class="screen hidden fade" id="page2">
-
+<div class="screen hidden" id="s2">
 <p>
-Здесь напиши свой текст.
-
-Например:
-
-"Я долго думал, что подарить человеку,
-который умеет превращать обычные дни
-в особенные."
+Я не буду долго говорить.
+<br><br>
+Я просто хочу, чтобы ты увидела это.
 </p>
-
-<button onclick="next2()">
-Еще кое-что...
-</button>
-
+<button onclick="next2()">Дальше</button>
 </div>
 
-<div class="screen hidden fade" id="page3">
+<div class="screen hidden" id="s3">
+<h1 class="glow">🎫</h1>
 
-<h1>🎫</h1>
+<p>У нас есть один вечер.</p>
 
-<p>
-У нас есть планы на один твой вечер.
-</p>
+<h1>Концерт Валерия Меладзе</h1>
 
-<br>
+<p>И я хочу провести его с тобой 💜</p>
 
-<h1>
-Концерт Валерия Меладзе
-</h1>
-
-<img src="ticket.jpg" class="ticket">
-
-<p style="margin-top:20px;">
-Я подумала, что этот вечер стоит провести вместе с Валерой ❤️
-</p>
-
+<a class="button" href="ticket.pdf" target="_blank">
+Открыть билет (PDF)
+</a>
 </div>
 
 <script>
 function next1(){
-document.getElementById("page1").classList.add("hidden");
-document.getElementById("page2").classList.remove("hidden");
+document.getElementById("s1").classList.add("hidden");
+document.getElementById("s2").classList.remove("hidden");
+startMusic();
 }
 
 function next2(){
-document.getElementById("page2").classList.add("hidden");
-document.getElementById("page3").classList.remove("hidden");
+document.getElementById("s2").classList.add("hidden");
+document.getElementById("s3").classList.remove("hidden");
 }
+
+function startMusic(){
+const m=document.getElementById("music");
+m.volume=0.5;
+m.play();
+}
+
+/* hearts */
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💜";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(3+Math.random()*3)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},250);
 </script>
 
 </body>
