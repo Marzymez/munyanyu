@@ -7,26 +7,24 @@
 
 <style>
 
-/* RESET */
 html, body{
 margin:0;
 padding:0;
 width:100%;
 height:100%;
 overflow:hidden;
--webkit-text-size-adjust:100%;
 font-family: Georgia, serif;
+-webkit-text-size-adjust:100%;
 }
 
-/* BACKGROUND */
 body{
 background:
 url("tae.jpg") center center / cover no-repeat fixed;
-color:white;
 position:relative;
+color:white;
 }
 
-/* DARK OVERLAY */
+/* overlay */
 body::before{
 content:"";
 position:absolute;
@@ -35,13 +33,12 @@ background:rgba(0,0,0,0.78);
 z-index:0;
 }
 
-/* SCREEN */
+/* screen */
 .screen{
 position:absolute;
 inset:0;
 z-index:2;
 display:flex;
-flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
@@ -50,34 +47,32 @@ box-sizing:border-box;
 height:100dvh;
 }
 
-/* HIDE */
 .hidden{display:none;}
 
-/* CARD */
+/* card */
 .card{
 width:92%;
 max-width:700px;
-background:rgba(0,0,0,0.45);
-backdrop-filter: blur(10px);
-padding:22px 20px;
+background:rgba(0,0,0,0.6);
+backdrop-filter: blur(12px);
+padding:22px;
 border-radius:18px;
 box-shadow:0 0 25px rgba(168,85,247,0.25);
 }
 
 /* TEXT */
 h1{
+color:#fff;
 font-size:clamp(28px, 6vw, 42px);
-color:#ffffff;
 text-shadow:
-0 0 8px #a855f7,
-0 0 18px #7c3aed,
-0 0 35px #a855f7;
+0 0 10px #a855f7,
+0 0 25px #7c3aed;
 }
 
 p{
+color:#fff;
 font-size:clamp(16px, 4.5vw, 20px);
 line-height:1.7;
-color:#ffffff;
 text-shadow:
 0 0 6px #a855f7,
 0 0 14px rgba(168,85,247,0.8);
@@ -94,17 +89,10 @@ background:#7c3aed;
 color:white;
 font-size:16px;
 text-decoration:none;
-box-shadow:
-0 0 15px #7c3aed,
-0 0 30px #a855f7;
-transition:0.3s;
+box-shadow:0 0 15px #7c3aed, 0 0 30px #a855f7;
 }
 
-button:active, a.button:active{
-transform:scale(0.97);
-}
-
-/* HEARTS */
+/* hearts */
 .heart{
 position:absolute;
 color:#d946ef;
@@ -131,7 +119,7 @@ z-index:1;
 <div class="screen" id="s1">
 <div class="card">
 <h1>💜</h1>
-<p>с днём рождения, Муняню 🤍</p>
+<p id="t1"></p>
 <button onclick="next1()">дальше</button>
 </div>
 </div>
@@ -139,10 +127,7 @@ z-index:1;
 <!-- SCREEN 2 -->
 <div class="screen hidden" id="s2">
 <div class="card">
-<p>
-пусть у тебя всё складывается так, как ты хочешь, и жизнь радует каждый день.<br><br>
-люблю и очень ценю тебя!
-</p>
+<p id="t2"></p>
 <button onclick="next2()">ещё</button>
 </div>
 </div>
@@ -153,7 +138,7 @@ z-index:1;
 
 <h1>🎫</h1>
 
-<p>твоя чупапи 🫶🏻🤍</p>
+<p id="t3"></p>
 
 <h1>Концерт Валерия Меладзе</h1>
 
@@ -168,15 +153,51 @@ z-index:1;
 
 <script>
 
+let i1=0, i2=0, i3=0;
+
+const text1="с днём рождения, Муняню 🤍";
+const text2="пусть у тебя всё складывается так, как ты хочешь, и жизнь радует каждый день. люблю и очень ценю тебя!";
+const text3="твоя чупапи 🫶🏻🤍";
+
+/* TYPEWRITER 1 */
+function type1(){
+if(i1<text1.length){
+document.getElementById("t1").innerHTML+=text1.charAt(i1);
+i1++;
+setTimeout(type1,60);
+}
+}
+
+/* TYPEWRITER 2 */
+function type2(){
+if(i2<text2.length){
+document.getElementById("t2").innerHTML+=text2.charAt(i2);
+i2++;
+setTimeout(type2,40);
+}
+}
+
+/* TYPEWRITER 3 */
+function type3(){
+if(i3<text3.length){
+document.getElementById("t3").innerHTML+=text3.charAt(i3);
+i3++;
+setTimeout(type3,60);
+}
+}
+
+/* NAV */
 function next1(){
 document.getElementById("s1").classList.add("hidden");
 document.getElementById("s2").classList.remove("hidden");
 startMusic();
+type2();
 }
 
 function next2(){
 document.getElementById("s2").classList.add("hidden");
 document.getElementById("s3").classList.remove("hidden");
+type3();
 }
 
 /* MUSIC */
@@ -196,6 +217,9 @@ h.style.animationDuration=(3+Math.random()*3)+"s";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),6000);
 },250);
+
+/* start first screen text */
+window.onload=type1;
 
 </script>
 
